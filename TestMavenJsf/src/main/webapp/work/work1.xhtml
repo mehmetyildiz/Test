@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich">
+
+<body>
+	<ui:composition template="/templates/template.xhtml">
+		<ui:define name="title">Work 1!</ui:define>
+		<ui:define name="body">
+
+			<h:form>
+				<a4j:commandButton action="#{work1.send}" />
+				<ui:remove>
+					<h:outputLabel value="Name:" for="nameInput" />
+					<h:inputText id="nameInput" value="#{rich.name}">
+						<a4j:ajax event="keyup" render="output" />
+					</h:inputText>
+					<h:panelGroup id="output">
+						<h:outputText value="Hello #{rich.name}!" rendered="#{not empty rich.name}" />
+					</h:panelGroup>
+				</ui:remove>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

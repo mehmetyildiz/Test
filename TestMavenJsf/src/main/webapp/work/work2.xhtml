@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich">
+
+<body>
+	<ui:composition template="/templates/template.xhtml">
+		<ui:define name="title">Work 2!</ui:define>
+		<ui:define name="body">
+
+			<h:form>
+				<rich:panel>
+					<h:inputText label="No:" value="" />
+					<div />
+					<h:inputText label="Adı:" value="" />
+					<div />
+					<h:inputText label="Soyadı:" value="" />
+					<div />
+				</rich:panel>
+
+				<rich:panel id="userListTablePanel">
+
+					<div>
+						<a4j:commandButton value="Call the popup !" oncomplete="#{rich:component('userListPopupPanel')}.show();" />
+					</div>
+
+					<rich:popupPanel id="userListPopupPanel" modal="true" resizeable="false" height="400" width="600"
+						onmaskclick="#{rich:component('userListPopupPanel')}.hide();">
+						<f:facet name="header">
+							<h:outputText value="User List  Popup Panel" />
+						</f:facet>
+						<f:facet name="controls">
+							<h:outputLink value="#" onclick="#{rich:component('userListPopupPanel')}.hide(); return false;"> X
+					</h:outputLink>
+						</f:facet>
+						<rich:extendedDataTable id="userListTable" value="#{work1.users}" var="user" rows="4">
+							<f:facet name="header">
+								<h:outputText value="User List" />
+							</f:facet>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="No:" />
+								</f:facet>
+								<h:outputText value="#{user.no}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Adı" />
+								</f:facet>
+								<h:outputText value="#{user.ad}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Soyadı" />
+								</f:facet>
+								<h:outputText value="#{user.soyad}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Okul" />
+								</f:facet>
+								<h:outputText value="#{user.okul}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Kaldır" />
+								</f:facet>
+								<a4j:commandButton value="Kaldır" execute="userListTable" render="userListTable" action="#{work1.removeAll(user)}" />
+							</rich:column>
+							<f:facet name="footer">
+								<rich:dataScroller for="userListTable" maxPages="4" />
+							</f:facet>
+						</rich:extendedDataTable>
+					</rich:popupPanel>
+				</rich:panel>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
